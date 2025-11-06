@@ -146,3 +146,23 @@ function addRippleEffect(e) {
 document.querySelectorAll(".btn").forEach((button) => {
   button.addEventListener("click", addRippleEffect)
 })
+
+// Navbar toggler icon swap (hamburger <-> X) for mobile
+const navbarToggler = document.getElementById("navbarToggler")
+const navbarTogglerIcon = document.getElementById("navbarTogglerIcon")
+const navbarCollapse = document.getElementById("navbarNav")
+
+if (navbarCollapse && navbarTogglerIcon) {
+  // Bootstrap collapse events
+  navbarCollapse.addEventListener("show.bs.collapse", () => {
+    navbarTogglerIcon.classList.remove("bi-list")
+    navbarTogglerIcon.classList.add("bi-x-lg")
+    navbarToggler.setAttribute("aria-expanded", "true")
+  })
+
+  navbarCollapse.addEventListener("hide.bs.collapse", () => {
+    navbarTogglerIcon.classList.remove("bi-x-lg")
+    navbarTogglerIcon.classList.add("bi-list")
+    navbarToggler.setAttribute("aria-expanded", "false")
+  })
+}

@@ -2,6 +2,7 @@
   --accent-primary: #3b82f6;
   --accent-secondary: #8b5cf6;
   --accent-tertiary: #ec4899;
+  --accent-success: #06692f;
   --bg-light: #ffffff;
   --bg-dark: #0f172a;
   --text-light: #1e293b;
@@ -316,6 +317,33 @@ body.dark-mode .stat-label {
   color: var(--text-dark);
 }
 
+/* faded background image for stat cards */
+.stat-card.has-bg {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  background-color: transparent; /* keep glass-card styles visible */
+}
+
+.stat-card.has-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("./assets/brown-pattern.jpg"); /* replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.07; /* adjust fade amount */
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ensure card content stays above the faded image */
+.stat-card.has-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* Qualifications */
 .qualifications {
   list-style: none;
@@ -576,6 +604,35 @@ footer a {
 
 footer a:hover {
   color: var(--accent-secondary);
+}
+
+/* dark overlay for sections/cards that have a background image */
+.has-bg-overlay {
+  position: relative; /* ensure pseudo element is positioned correctly */
+  overflow: hidden;
+}
+
+.has-bg-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95); /* dark overlay color & opacity (adjust as needed) */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ensure section content sits above the overlay */
+.has-bg-overlay > .container,
+.has-bg-overlay > .container * {
+  position: relative;
+  z-index: 1;
+}
+
+/* slightly stronger overlay on very small screens for contrast */
+@media (max-width: 576px) {
+  .has-bg-overlay::before {
+    background: rgba(0, 0, 0, 0.6);
+  }
 }
 
 /* Responsive Design */
